@@ -9,6 +9,8 @@
 import Foundation
 class Calculations{
     
+    
+    // Declaring constant measurement units
     let yards = "Yards"
     let meters = "Meters"
     let miles = "Miles"
@@ -27,6 +29,9 @@ class Calculations{
     
     static var modeNum:Int = 0
     
+    /**********************************************************
+     * Constructor method
+     ***********************************************************/
     init () {
         
         currentTo = meters
@@ -35,6 +40,10 @@ class Calculations{
         
     }
     
+    /********************************************************
+    * This function switches the current mode between distance and  volume
+    ************************************************************/
+ 
     func switchMode(){
         if mode == distance{
             mode = volume
@@ -50,6 +59,10 @@ class Calculations{
         }
     }
     
+    /**********************************************************
+    * This is a helper function that plays middle man in translating
+    * user calculation requests to the correct calculation function.
+    ***********************************************************/
     func calculate(from:String,to:String,value:String)->String{
         if mode == distance{
             return calcDistance(from:from,to:to,value:value)
@@ -59,6 +72,11 @@ class Calculations{
         }
     }
     
+    
+    /**********************************************************
+     * This function runs a distance conversion calculation and
+     * returns the results as a string.
+     ***********************************************************/
     func calcDistance(from:String,to:String,value:String)->String{
         let fromValue = (value as NSString).floatValue
         var returnValue:Float = 0
@@ -69,6 +87,11 @@ class Calculations{
             if to == miles {
                 returnValue = fromValue * 0.000568182
             }
+            
+            if to == yards {
+                returnValue = fromValue
+            }
+
         }
         
         
@@ -79,6 +102,11 @@ class Calculations{
             if to == miles {
                 returnValue = fromValue * 0.000621371
             }
+            
+            if to == meters {
+                returnValue = fromValue
+            }
+
         }
         
         
@@ -91,12 +119,20 @@ class Calculations{
                 returnValue = fromValue / 0.000621371
             }
             
+            if to == miles {
+                returnValue = fromValue
+            }
+
+            
         }
         
         return "\(returnValue)"
     }
     
-    
+    /**********************************************************
+    * This function runs a volume conversion calculation and
+    * returns the results as a string.
+    ***********************************************************/
     func calcVolume(from:String,to:String,value:String)->String{
         let fromValue = (value as NSString).floatValue
         var returnValue:Float = 0
@@ -107,7 +143,13 @@ class Calculations{
             if to == liters {
                 returnValue = fromValue * 3.78541
             }
+            
+            if to == gallons {
+                returnValue = fromValue
+            }
+
         }
+        
         
         
         if from == liters {
@@ -117,6 +159,11 @@ class Calculations{
             if to == quarts {
                 returnValue = fromValue / 0.946353
             }
+            
+            if to == liters {
+                returnValue = fromValue
+            }
+
         }
         
         
@@ -129,11 +176,20 @@ class Calculations{
                 returnValue = fromValue * 0.946353
             }
             
+            if to == quarts {
+                returnValue = fromValue
+            }
+
+            
         }
         
         return "\(returnValue)"
     }
     
+    
+    /**********************************************************
+    * This function returns the current mode of the calculator
+    ***********************************************************/
     static func getMode() -> String {
         if self.modeNum == 0 {
             return "Distance"
