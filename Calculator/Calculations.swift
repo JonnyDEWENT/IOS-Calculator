@@ -1,7 +1,7 @@
 //
 //  Calculations.swift
 //  Calculator
-//
+//  This class serves as a model for the ios calculator
 //  Created by Jon DeWent on 9/19/18.
 //  Copyright © 2018 Jon DeWent. All rights reserved.
 //
@@ -190,14 +190,14 @@ class Calculations{
     /**********************************************************
     * This function returns the current mode of the calculator
     ***********************************************************/
-    static func getMode() -> String {
-        if self.modeNum == 0 {
-            return "Distance"
-        }
-        else {
-            return "Volume"
-        }
-    }
+//    static func getMode() -> String {
+//        if self.modeNum == 0 {
+//            return "Distance"
+//        }
+//        else {
+//            return "Volume"
+//        }
+//    }
     
     
     

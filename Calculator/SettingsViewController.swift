@@ -32,10 +32,11 @@ class SettingsViewController: UIViewController {
         
         
         super.viewDidLoad()
-        self.mode = Calculations.getMode()
+//        self.mode = Calculations.getMode()
         
         setDataSource(mode: self.mode!)
-        //self.pickerData = ["dog"]
+        toLabel.text = toUnits
+        fromLabel.text = fromUnits
         self.picker.delegate = self
         self.picker.dataSource = self
         self.picker.reloadAllComponents()
@@ -43,11 +44,10 @@ class SettingsViewController: UIViewController {
         
         
         toLabel.isUserInteractionEnabled = true
-        toLabel.text = pickerData[1]
         fromLabel.isUserInteractionEnabled = true
-        fromLabel.text = pickerData[0]
+ 
         
-        
+        // creating tap recognizers for labels
         let tapFrom = UITapGestureRecognizer(target: self, action: #selector(self.fromTapped))
         self.fromLabel.addGestureRecognizer(tapFrom)
         
@@ -59,6 +59,7 @@ class SettingsViewController: UIViewController {
         
     }
     
+    // This function sets data source depending on the model mode
     func setDataSource(mode:String){
         if mode == "Distance"{
             self.pickerData = ["Yards","Meters","Miles"]
@@ -73,7 +74,7 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    // Data picker displayed when to label tapped
     @IBAction func toTapped(_ sender: UITapGestureRecognizer) {
         activeLabel = toLabel
         self.picker.isHidden = false
@@ -81,8 +82,7 @@ class SettingsViewController: UIViewController {
         self.picker.isHidden = false
     }
     
-    //@IBOutlet var fromTapped: UITapGestureRecognizer!
-    
+    // Data picker displayed when to label tapped
     @IBAction func fromTapped(_ sender: UITapGestureRecognizer) {
         activeLabel = fromLabel
         self.picker.isHidden = false
@@ -91,7 +91,7 @@ class SettingsViewController: UIViewController {
         self.picker.isHidden = false
     }
     
-    
+    // Updates units on main screen and exits settings view
     @IBAction func savePressed(_ sender: Any) {
         if let d = self.delegate{
             d.showSelection(fromUnit:self.fromLabel.text!, toUnit:self.toLabel.text!)
@@ -99,18 +99,23 @@ class SettingsViewController: UIViewController {
         self.dismiss(animated: true, completion:nil)
     }
     
+    // Exits settings view
     @IBAction func cancelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion:nil)
     }
     
+    // Hides picker when screen is tapped
     @IBAction func tappedOut(_ sender: UITapGestureRecognizer) {
         self.picker.isHidden = true
     }
     
+    // Sets the mode of settings view
     func passMode(mode:String){
         self.mode = mode
     }
 }
+
+// SettingsViewController implements UIPickerViewDelegate, UIPickerViewDataSource
 extension SettingsViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     
     

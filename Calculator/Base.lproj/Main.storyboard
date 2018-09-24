@@ -103,7 +103,7 @@
                                 <state key="normal" title="Settings"/>
                                 <connections>
                                     <action selector="settingsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ng-RC-0UJ"/>
-                                    <segue destination="Rdq-Ti-lZA" kind="show" id="OYv-vr-s5h"/>
+                                    <segue destination="Rdq-Ti-lZA" kind="show" identifier="settingsSegue" id="OYv-vr-s5h"/>
                                 </connections>
                             </button>
                         </subviews>
